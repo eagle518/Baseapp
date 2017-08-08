@@ -1,11 +1,16 @@
 package com.lyw.app;
 
+import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Handler;
+import android.support.v4.content.SharedPreferencesCompat;
+import android.view.Gravity;
+import android.widget.Toast;
 
-import com.lyw.app.base.BaseApplication;
 import com.lyw.app.cache.DataCleanManager;
-import com.lyw.app.widget.MethodsCompat;
+import com.lyw.app.ui.widget.MethodsCompat;
+import com.lyw.app.ui.widget.SimplexToast;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.Properties;
@@ -21,18 +26,20 @@ import okhttp3.OkHttpClient;
  * 全局application初始化
  *
  */
-public class GlobalApplication extends BaseApplication {
+public class GlobalApplication extends Application {
+    //sp设立的文件名字
+    private static final String PREF_NAME = "creativelocker.pref";
     //全局单例
     private static GlobalApplication instance;
     //上下文对象
-    private static Context context;
+    private static Context _context;
     private static Handler handler;
     private static  int mainThreadId;
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
-        context = getApplicationContext();
+        _context = getApplicationContext();
         handler = new Handler();
         mainThreadId = android.os.Process.myTid();
 
@@ -45,7 +52,7 @@ public class GlobalApplication extends BaseApplication {
     }
     //当前运行的全局上下文
     public static Context getContext(){
-        return context;
+        return _context;
     }
     //主线程handler
     public static Handler getHandler(){
@@ -55,6 +62,10 @@ public class GlobalApplication extends BaseApplication {
     public static int getMainThreadId(){
         return mainThreadId;
     }
+
+
+    //应用配置文件和sp文件不同
+
     //获取该全局对应的app_config目录下的config
     public Properties getProperties() {
         return AppConfig.getAppConfig(this).get();
@@ -123,7 +134,7 @@ public class GlobalApplication extends BaseApplication {
       //  OkHttpClient.init(this);
         //初始化其他相关，框架，sdk，数据库,百度地图....
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-//                .addInterceptor(new LoggerInterceptor("TAG"))
+    //          .addInterceptor(new LoggerInterceptor("TAG"))
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
                 //其他配置
@@ -132,7 +143,96 @@ public class GlobalApplication extends BaseApplication {
         OkHttpUtils.initClient(okHttpClient);
     }
 
+    //关于sp的静态操作方法
+    public static void set(String key, int value) {
+        SharedPreferences.Editor editor = getPreferences().edit();
+        editor.putInt(key, value);
+        SharedPreferencesCompat.EditorCompat.getInstance().apply(editor);
+    }
 
+    public static void set(String key, boolean value) {
+        SharedPreferences.Editor editor = getPreferences().edit();
+        editor.putBoolean(key, value);
+        SharedPreferencesCompat.EditorCompat.getInstance().apply(editor);
+    }
+
+    public static void set(String key, String value) {
+        SharedPreferences.Editor editor = getPreferences().edit();
+        editor.putString(key, value);
+        SharedPreferencesCompat.EditorCompat.getInstance().apply(editor);
+    }
+
+    public static boolean get(String key, boolean defValue) {
+        return getPreferences().getBoolean(key, defValue);
+    }
+
+    public static String get(String key, String defValue) {
+        return getPreferences().getString(key, defValue);
+    }
+
+    public static int get(String key, int defValue) {
+        return getPreferences().getInt(key, defValue);
+    }
+
+    public static long get(String key, long defValue) {
+        return getPreferences().getLong(key, defValue);
+    }
+
+    public static float get(String key, float defValue) {
+        return getPreferences().getFloat(key, defValue);
+    }
+    //获取文件名为xx的sp文件
+    public static SharedPreferences getPreferences() {
+        return getContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+    }
+
+    public static void showToast(int message) {
+        showToast(message, Toast.LENGTH_LONG, 0);
+    }
+
+    public static void showToast(String message) {
+        showToast(message, Toast.LENGTH_LONG, 0, Gravity.BOTTOM);
+    }
+
+    public static void showToast(int message, int icon) {
+        showToast(message, Toast.LENGTH_LONG, icon);
+    }
+
+    public static void showToast(String message, int icon) {
+        showToast(message, Toast.LENGTH_LONG, icon, Gravity.BOTTOM);
+    }
+
+    public static void showToastShort(int message) {
+        showToast(message, Toast.LENGTH_SHORT, 0);
+    }
+
+    public static void showToastShort(String message) {
+        showToast(message, Toast.LENGTH_SHORT, 0, Gravity.BOTTOM);
+    }
+
+    public static void showToastShort(int message, Object... args) {
+        showToast(message, Toast.LENGTH_SHORT, 0, Gravity.BOTTOM, args);
+    }
+
+    public static void showToast(int message, int duration, int icon) {
+        showToast(message, duration, icon, Gravity.BOTTOM);
+    }
+
+    public static void showToast(int message, int duration, int icon,
+                                 int gravity) {
+        showToast(getContext().getString(message), duration, icon, gravity);
+    }
+
+    public static void showToast(int message, int duration, int icon,
+                                 int gravity, Object... args) {
+        showToast(getContext().getString(message, args), duration, icon, gravity);
+    }
+
+    public static void showToast(String message, int duration, int icon, int gravity) {
+        Context context = _context;
+        if (context != null)
+            SimplexToast.show(context, message, gravity, duration);
+    }
 
 
 }

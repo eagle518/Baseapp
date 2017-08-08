@@ -1,4 +1,4 @@
-package com.lyw.app.ui.base.frags;
+package com.lyw.app.ui.frags;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

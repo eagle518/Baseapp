@@ -1,10 +1,14 @@
-package com.lyw.app;
+package com.lyw.app.ui.atys;
 
 import android.content.Intent;
+import android.text.TextUtils;
 
-import com.lyw.app.ui.MainActivity;
-import com.lyw.app.ui.base.atys.AtyLogin;
-import com.lyw.app.ui.base.atys.BaseActivity;
+import com.lyw.app.GlobalApplication;
+import com.lyw.app.R;
+import com.lyw.app.Setting;
+import com.lyw.app.ui.account.AccountHelper;
+import com.lyw.app.ui.account.bean.User;
+import com.lyw.app.utils.AppOperator;
 
 
 /**
@@ -23,24 +27,22 @@ public class LaunchActivity extends BaseActivity {
         super.initData();
         // 在这里我们检测是否是新版本安装，如果是则进行老版本数据迁移工作
         // 该工作可能消耗大量时间所以放在自线程中执行
-        /*AppOperator.runOnThread(new Runnable() {
+        //线程池执行
+        AppOperator.runOnThread(new Runnable() {
             @Override
             public void run() {
                 doMerge();
             }
-        });*/
-        try {
-            Thread.sleep(1800);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        doMerge();
+        });
     }
+    //版本检查
+
     private void doMerge() {
         // 判断是否是新版本
-       /* if (Setting.checkIsNewVersion(this)) {
-            // Cookie迁移
+        if (Setting.checkIsNewVersion(this)) {
+            // Cookie迁移,获得保存着的，赋值前先移除，再赋给获得的登录user
             String cookie = GlobalApplication.getInstance().getProperty("cookie");
+            //判断是否为空cookie
             if (!TextUtils.isEmpty(cookie)) {
                 GlobalApplication.getInstance().removeProperty("cookie");
                 User user = AccountHelper.getUser();
@@ -48,37 +50,23 @@ public class LaunchActivity extends BaseActivity {
                 AccountHelper.updateUserCache(user);
                 GlobalApplication.reInit();
             }
-        }*/
+        }
 
-        // 栏目相关数据合并操作
-       // DynamicTabFragment.initTabPickerManager();
+
 
         // Delay...
-       /* try {
+        try {
             Thread.sleep(800);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }*/
-        String token = Setting.getCachedToken(this);
-        String phone_num = Setting.getCachedUID(this);
-
-        if (token!=null&&phone_num!=null) {
-            Intent i =new Intent(this, MainActivity.class);
-            i.putExtra(Setting.KEY_TOKEN, token);
-            i.putExtra(Setting.KEY_UID, phone_num);
-            startActivity(i);
-        }else{
-            // 完成后进行跳转操作
-            redirectTo();
         }
 
-        finish();
-
-
+        // 完成后进行跳转操作
+        redirectTo();
     }
 
     private void redirectTo() {
-        Intent intent = new Intent(this, AtyLogin.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }

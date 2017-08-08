@@ -11,8 +11,6 @@ import android.util.TypedValue;
 import android.view.View;
 
 import com.lyw.app.GlobalApplication;
-import com.lyw.app.base.BaseApplication;
-import com.orhanobut.logger.Logger;
 
 /**
  * Created by lyw on 2017/7/25.
@@ -88,7 +86,7 @@ public class UIUtils {
     }
 
     public static DisplayMetrics getDisplayMetrics() {
-        return BaseApplication.context().getResources().getDisplayMetrics();
+        return GlobalApplication.getContext().getResources().getDisplayMetrics();
     }
     public static float getScreenHeight() {
         return getDisplayMetrics().heightPixels;
@@ -99,7 +97,7 @@ public class UIUtils {
     }
 
     public static boolean isPortrait() {
-        return BaseApplication.context().getResources().getConfiguration()
+        return GlobalApplication.getContext().getResources().getConfiguration()
                 .orientation == Configuration.ORIENTATION_PORTRAIT;
     }
 

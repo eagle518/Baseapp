@@ -9,7 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 
-import com.lyw.app.base.BaseApplication;
+import com.lyw.app.GlobalApplication;
 
 import java.io.File;
 
@@ -21,15 +21,15 @@ import java.io.File;
 public class VersionUtil {
     //是否有网络
     public static boolean hasInternet() {
-        ConnectivityManager cm = (ConnectivityManager) BaseApplication.context()
+        ConnectivityManager cm = (ConnectivityManager) GlobalApplication.getContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = cm.getActiveNetworkInfo();
         return info != null && info.isAvailable() && info.isConnected();
     }
     //是否打开wifi
     public static boolean isWifiOpen() {
-        ConnectivityManager cm = (ConnectivityManager) BaseApplication
-                .context().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager) GlobalApplication
+                .getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = cm.getActiveNetworkInfo();
         if (info == null) return false;
         if (!info.isAvailable() || !info.isConnected()) return false;
@@ -38,12 +38,12 @@ public class VersionUtil {
     }
     //获得版本号
     public static int getVersionCode() {
-        return getVersionCode(BaseApplication.context().getPackageName());
+        return getVersionCode(GlobalApplication.getContext().getPackageName());
     }
     //根据包名获得版本号
     public static int getVersionCode(String packageName) {
         try {
-            return BaseApplication.context()
+            return GlobalApplication.getContext()
                     .getPackageManager()
                     .getPackageInfo(packageName, 0)
                     .versionCode;
@@ -54,10 +54,9 @@ public class VersionUtil {
     //获得版本名称
     public static String getVersionName() {
         try {
-            return BaseApplication
-                    .context()
+            return GlobalApplication.getContext()
                     .getPackageManager()
-                    .getPackageInfo(BaseApplication.context().getPackageName(), 0)
+                    .getPackageInfo(GlobalApplication.getContext().getPackageName(), 0)
                     .versionName;
         } catch (PackageManager.NameNotFoundException ex) {
             return "undefined version name";

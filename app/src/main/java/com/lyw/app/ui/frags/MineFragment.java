@@ -1,17 +1,19 @@
-package com.lyw.app.ui.base.frags;
+package com.lyw.app.ui.frags;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import com.lyw.app.R;
 
 
+/**
+ * Created by Ivan on 15/9/22.
+ */
+public class MineFragment extends BaseFragment{
 
 
-public class CartFragment extends BaseFragment {
 
     @Override
     public View createView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

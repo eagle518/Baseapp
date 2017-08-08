@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v4.content.SharedPreferencesCompat;
 import android.support.v4.util.ArrayMap;
+import android.util.Log;
 
-import com.orhanobut.logger.Logger;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -17,9 +17,10 @@ import java.util.Set;
  * SharedPreferences Helper
  * 该辅助类能让SharedPreferences配合一个Bean使用，
  * 以简化复杂的"KEY"定义问题。
- * Created by lyw on 2017/7/23.
+ * <p>
+ * Created by qiujuer
+ * on 2016/10/27.
  */
-
 public final class SharedPreferencesHelper {
     private static final String SEPARATOR = "#";
     private static final String TAG = SharedPreferencesHelper.class.getName();
@@ -113,11 +114,11 @@ public final class SharedPreferencesHelper {
                 } else if (type.equals(String.class)) {
                     editor.putString(key, value.toString());
                 } else {
-                    Logger.d(String.format("Con't support save this type:%s, value:%s, key:%s",
+                    Log.d(TAG, String.format("Con't support save this type:%s, value:%s, key:%s",
                             type, value, key));
                 }
             } catch (IllegalArgumentException e) {
-                Logger.d("Save error:" + e.getMessage());
+                Log.d(TAG, "Save error:" + e.getMessage());
             }
         }
 
@@ -241,7 +242,7 @@ public final class SharedPreferencesHelper {
             try {
                 value = field.get(t);
             } catch (IllegalArgumentException | IllegalAccessException e) {
-                Logger.d("buildValuesToMap error:" + e.getMessage());
+                Log.d(TAG, "buildValuesToMap error:" + e.getMessage());
                 continue;
             }
 
@@ -335,11 +336,11 @@ public final class SharedPreferencesHelper {
                     field.set(target, value);
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
-                    Logger.d(String.format("Set field error, Key:%s, type:%s, value:%s",
+                    Log.d(TAG, String.format("Set field error, Key:%s, type:%s, value:%s",
                             key, fieldType, value));
                 }
             } else {
-                Logger.d(String.format("Get field value error, Key:%s, type:%s",
+                Log.d(TAG, String.format("Get field value error, Key:%s, type:%s",
                         key, fieldType));
             }
         }

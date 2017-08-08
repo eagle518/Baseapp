@@ -1,4 +1,4 @@
-package com.lyw.app.ui;
+package com.lyw.app.ui.atys;
 
 
 import android.os.Bundle;
@@ -11,11 +11,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.lyw.app.R;
-import com.lyw.app.ui.base.frags.CartFragment;
-import com.lyw.app.ui.base.frags.CategoryFragment;
-import com.lyw.app.ui.base.frags.HomeFragment;
-import com.lyw.app.ui.base.frags.HotFragment;
-import com.lyw.app.ui.base.frags.MineFragment;
+import com.lyw.app.ui.frags.MineFragment;
 import com.lyw.app.ui.bean.Tab;
 import com.lyw.app.ui.widget.FragmentTabHost;
 
@@ -34,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
 
     private FragmentTabHost mTabhost;
 
-    private CartFragment cartFragment;
 
     private List<Tab> mTabs = new ArrayList<>(5);
     @Override
@@ -51,17 +46,17 @@ public class MainActivity extends AppCompatActivity {
     private void initTab() {
 
 
-        Tab tab_home = new Tab(HomeFragment.class,R.string.home,R.drawable.selector_icon_home);
-        Tab tab_hot = new Tab(HotFragment.class,R.string.hot,R.drawable.selector_icon_hot);
-        Tab tab_category = new Tab(CategoryFragment.class,R.string.catagory,R.drawable.selector_icon_category);
-        Tab tab_cart = new Tab(CartFragment.class,R.string.cart,R.drawable.selector_icon_cart);
-        Tab tab_mine = new Tab(MineFragment.class,R.string.mine,R.drawable.selector_icon_mine);
+        Tab tab_mine1 = new Tab(MineFragment.class,R.string.tab1,R.drawable.selector_icon_mine);
+        Tab tab_mine2 = new Tab(MineFragment.class,R.string.tab2,R.drawable.selector_icon_mine);
+        Tab tab_mine3 = new Tab(MineFragment.class,R.string.tab3,R.drawable.selector_icon_mine);
+        Tab tab_mine4 = new Tab(MineFragment.class,R.string.tab4,R.drawable.selector_icon_mine);
+        Tab tab_mine5 = new Tab(MineFragment.class,R.string.mine,R.drawable.selector_icon_mine);
 
-        mTabs.add(tab_home);
-        mTabs.add(tab_hot);
-        mTabs.add(tab_category);
-        mTabs.add(tab_cart);
-        mTabs.add(tab_mine);
+        mTabs.add(tab_mine1);
+        mTabs.add(tab_mine2);
+        mTabs.add(tab_mine3);
+        mTabs.add(tab_mine4);
+        mTabs.add(tab_mine5);
 
 
 
@@ -79,17 +74,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        mTabhost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-            @Override
-            public void onTabChanged(String tabId) {
-
-                if(tabId==getString(R.string.cart)){
-
-                    refData();
-                }
-
-            }
-        });
 
         mTabhost.getTabWidget().setShowDividers(LinearLayout.SHOW_DIVIDER_NONE);
         mTabhost.setCurrentTab(0);
@@ -98,21 +82,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void refData(){
 
-        /*if(cartFragment == null){
-
-            Fragment fragment =  getSupportFragmentManager().findFragmentByTag(getString(R.string.cart));
-            if(fragment !=null){
-                cartFragment= (CartFragment) fragment;
-                cartFragment.refData();
-            }
-        }
-        else{
-            cartFragment.refData();
-
-        }*/
-    }
 
 
     private View buildIndicator(Tab tab){

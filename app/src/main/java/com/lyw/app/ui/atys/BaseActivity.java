@@ -1,10 +1,11 @@
-package com.lyw.app.ui.base.atys;
+package com.lyw.app.ui.atys;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+
 
 import butterknife.ButterKnife;
 
@@ -13,9 +14,9 @@ import butterknife.ButterKnife;
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
-   // protected RequestManager mImageLoader;
+    //图片加载管理
+    //protected RequestManager mImageLoader;
     private boolean mIsDestroy;
-    private final String mPackageNameUmeng = this.getClass().getName();
     private Fragment mFragment;
 
     @Override
@@ -66,17 +67,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-    }
 
     protected abstract int getContentView();
 
@@ -94,12 +84,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
    //异步图片加载
-  /*  public synchronized RequestManager getImageLoader() {
+   /* public synchronized RequestManager getImageLoader() {
         if (mImageLoader == null)
            // mImageLoader = Glide.with(this);
         return mImageLoader;
-    }*/
-
+    }
+*/
     @Override
     protected void onDestroy() {
         mIsDestroy = true;

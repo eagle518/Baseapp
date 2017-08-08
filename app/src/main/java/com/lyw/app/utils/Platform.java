@@ -19,7 +19,6 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.orhanobut.logger.Logger;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -31,7 +30,6 @@ public class Platform
 
     public static Platform get()
     {
-        Logger.e(PLATFORM.getClass().toString());
         return PLATFORM;
     }
 

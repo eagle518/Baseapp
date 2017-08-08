@@ -19,6 +19,7 @@ import java.util.Properties;
  *
  * 应用程序配置类
  * 用于保存用户相关信息及设置
+ * 键值对形式
  *
  * @author lyw
  *	获取单例

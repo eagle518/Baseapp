@@ -1,4 +1,4 @@
-package com.lyw.app.widget;
+package com.lyw.app.ui.widget;
 
 import android.content.Context;
 import android.view.Gravity;
