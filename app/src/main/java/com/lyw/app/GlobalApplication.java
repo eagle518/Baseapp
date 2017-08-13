@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.widget.Toast;
 
 import com.lyw.app.cache.DataCleanManager;
+import com.lyw.app.ui.api.MyApi;
 import com.lyw.app.ui.widget.MethodsCompat;
 import com.lyw.app.ui.widget.SimplexToast;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -29,6 +30,8 @@ import okhttp3.OkHttpClient;
 public class GlobalApplication extends Application {
     //sp设立的文件名字
     private static final String PREF_NAME = "creativelocker.pref";
+
+    private static final String CONFIG_READ_STATE_PRE = "CONFIG_READ_STATE_PRE_";
     //全局单例
     private static GlobalApplication instance;
     //上下文对象
@@ -46,6 +49,9 @@ public class GlobalApplication extends Application {
         // 初始化
         init();
     }
+
+
+
     //全局单例
     public static GlobalApplication getInstance(){
         return instance;
@@ -127,20 +133,13 @@ public class GlobalApplication extends Application {
     }
     private void init() {
         // 初始化异常捕获类
-       // AppCrashHandler.getInstance().init(this);
+        AppCrashHandler.getInstance().init(this);
         // 初始化账户基础信息
        // AccountHelper.init(this);
         // 初始化网络请求
       //  OkHttpClient.init(this);
         //初始化其他相关，框架，sdk，数据库,百度地图....
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-    //          .addInterceptor(new LoggerInterceptor("TAG"))
-                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
-                .readTimeout(10000L, TimeUnit.MILLISECONDS)
-                //其他配置
-                .build();
-
-        OkHttpUtils.initClient(okHttpClient);
+        MyApi.init(this);
     }
 
     //关于sp的静态操作方法

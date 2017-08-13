@@ -2,6 +2,7 @@ package com.lyw.app.ui.account;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -79,9 +80,29 @@ public final class AccountHelper {
 
     public static boolean login(final User user, Header[] headers) {
         // 更新Cookie
-       //登录逻辑保存获取相应信息
-        //回馈成功失败状态值
-        return false;
+       // String cookie = ApiHttpClient.getCookie(headers);
+        String cookie = "测试登录cookie，lyw";
+        if (TextUtils.isEmpty(cookie) || cookie.length() < 6) {
+            return false;
+        }
+
+        Log.d(TAG, "login:" + user + " cookie：" + cookie);
+
+        user.setCookie(cookie);
+
+        int count = 10;
+        boolean saveOk;
+        // 保存缓存
+        while (!(saveOk = updateUserCache(user)) && count-- > 0) {
+            SystemClock.sleep(100);
+        }
+
+        if (saveOk) {
+            //ApiHttpClient.setCookieHeader(getCookie());
+            // 登陆成功,重新启动消息服务
+           // NoticeManager.init(instances.application);
+        }
+        return saveOk;
     }
 
     /**

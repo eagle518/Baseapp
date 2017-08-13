@@ -1,7 +1,8 @@
 <resources>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
-
+    <dimen name="g_loading_maxSize">40dp</dimen>
+    <dimen name="g_loading_minSize">28dp</dimen>
     <!--
          Per the design guidelines, navigation drawers should be between 240dp and 320dp:
          https://developer.android.com/design/patterns/navigation-drawer.html

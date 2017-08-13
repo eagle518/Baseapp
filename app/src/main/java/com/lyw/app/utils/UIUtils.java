@@ -54,52 +54,6 @@ public class UIUtils {
     }
 
 
-    public static int dip2px(float dip) {
-        float density = getContext().getResources().getDisplayMetrics().density;
-        return (int) (dip * density + 0.5f);
-    }
-
-    public static float px2dip(int px) {
-        float density = getContext().getResources().getDisplayMetrics().density;
-        return px / density;
-    }
-
-
-
-    public static float spToPx(Resources resources, float sp) {
-        DisplayMetrics metrics = resources.getDisplayMetrics();
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, metrics);
-    }
-
-
-    public static float dipToPx(Resources resources, float dp) {
-        DisplayMetrics metrics = resources.getDisplayMetrics();
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, metrics);
-    }
-
-    public static float dp2px(float dp) {
-        return dp * getDisplayMetrics().density;
-    }
-
-    public static float px2dp(float px) {
-        return px / getDisplayMetrics().density;
-    }
-
-    public static DisplayMetrics getDisplayMetrics() {
-        return GlobalApplication.getContext().getResources().getDisplayMetrics();
-    }
-    public static float getScreenHeight() {
-        return getDisplayMetrics().heightPixels;
-    }
-
-    public static float getScreenWidth() {
-        return getDisplayMetrics().widthPixels;
-    }
-
-    public static boolean isPortrait() {
-        return GlobalApplication.getContext().getResources().getConfiguration()
-                .orientation == Configuration.ORIENTATION_PORTRAIT;
-    }
 
     public static View inflate(int id) {
         return View.inflate(getContext(), id, null);

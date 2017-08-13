@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Looper;
 import android.widget.Toast;
 
+import com.lyw.app.ui.atys.ErrorActivity;
+
 /**
  * 不能被捕获的异常线程类
  * 单例
@@ -36,7 +38,7 @@ public class AppCrashHandler implements Thread.UncaughtExceptionHandler {
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
         //错误信息展示activity
-     //   ErrorActivity.show(mContext, ex.getMessage());
+        ErrorActivity.show(mContext, ex.getMessage());
         if (mDefaultHandler != null && (BuildConfig.DEBUG || (!handleException(ex)))) {
             mDefaultHandler.uncaughtException(thread, ex);
         } else {

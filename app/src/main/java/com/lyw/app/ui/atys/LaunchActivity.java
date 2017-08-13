@@ -2,13 +2,16 @@ package com.lyw.app.ui.atys;
 
 import android.content.Intent;
 import android.text.TextUtils;
+import android.widget.Toast;
 
+import com.lyw.app.AppConfig;
 import com.lyw.app.GlobalApplication;
 import com.lyw.app.R;
 import com.lyw.app.Setting;
 import com.lyw.app.ui.account.AccountHelper;
 import com.lyw.app.ui.account.bean.User;
 import com.lyw.app.utils.AppOperator;
+import com.lyw.app.utils.TimeUtils;
 
 
 /**
@@ -24,6 +27,11 @@ public class LaunchActivity extends BaseActivity {
     }
     @Override
     protected void initData() {
+
+        //配置文件生成并记录app当前进入时间点
+        //  AppConfig.getAppConfig(LaunchActivity.this).set("system_time", "初始化");
+        //GlobalApplication.getInstance().setProperty("system_time", "123456");
+
         super.initData();
         // 在这里我们检测是否是新版本安装，如果是则进行老版本数据迁移工作
         // 该工作可能消耗大量时间所以放在自线程中执行
@@ -38,6 +46,8 @@ public class LaunchActivity extends BaseActivity {
     //版本检查
 
     private void doMerge() {
+
+
         // 判断是否是新版本
         if (Setting.checkIsNewVersion(this)) {
             // Cookie迁移,获得保存着的，赋值前先移除，再赋给获得的登录user
