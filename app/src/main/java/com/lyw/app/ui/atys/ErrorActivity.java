@@ -18,12 +18,13 @@ import butterknife.OnClick;
  */
 
 public class ErrorActivity extends BaseActivity implements View.OnClickListener {
-    @BindView(R.id.tv_crash_info)
-    TextView mTextCrashInfo;
+   // @BindView(R.id.tv_crash_info)
+    private TextView mTextCrashInfo;
 
     @Override
     protected void initWindow() {
         super.initWindow();
+        mTextCrashInfo = (TextView) findViewById(R.id.tv_crash_info);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);

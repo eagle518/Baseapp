@@ -9,6 +9,8 @@ import android.support.annotation.NonNull;
 import android.text.Html;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 
@@ -21,6 +23,7 @@ import com.lyw.app.utils.TDevice;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.OnClick;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -34,8 +37,9 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class UpdateActivity extends BaseActivity implements View.OnClickListener,
        EasyPermissions.PermissionCallbacks{
 
-    @BindView(R.id.tv_update_info)
-    TextView mTextUpdateInfo;
+    private TextView mTextUpdateInfo;
+    private Button mBtn_update;
+    private ImageButton mBtn_close;
 
     private Version mVersion;
     private static final int RC_EXTERNAL_STORAGE = 0x04;//存储权限
@@ -55,12 +59,20 @@ public class UpdateActivity extends BaseActivity implements View.OnClickListener
     @Override
     protected void initData() {
         super.initData();
+        mTextUpdateInfo = (TextView) findViewById(R.id.tv_update_info);
+        mBtn_update = (Button) findViewById(R.id.btn_update);
+        mBtn_close = (ImageButton) findViewById(R.id.btn_close);
+        setListener();
         setTitle("");
         getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         mVersion = (Version) getIntent().getSerializableExtra("version");
         mTextUpdateInfo.setText(Html.fromHtml(mVersion.getMessage()));
     }
 
+    private void setListener(){
+        mBtn_update.setOnClickListener(this);
+        mBtn_close.setOnClickListener(this);
+    }
     @OnClick({R.id.btn_update, R.id.btn_close})
     @Override
     public void onClick(View v) {

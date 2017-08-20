@@ -98,7 +98,7 @@ public class DownloadService extends Service {
         if (!file.exists()) {
             file.mkdirs();
         }
-        final File apkFile = new File(saveFileName + "osc.apk");
+        final File apkFile = new File(saveFileName + "lyw.apk");
         setUpNotification();
         new Thread() {
             @Override

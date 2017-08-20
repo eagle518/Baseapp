@@ -1,6 +1,9 @@
 package com.lyw.app.ui.bean.base;
 
 
+//import com.lyw.app.ui.notice.NoticeBean;
+//import com.lyw.app.ui.notice.NoticeManager;
+
 /**
  * Created by huanghaibin
  * on 16-5-23.
@@ -19,6 +22,7 @@ public class ResultBean<T> {
     private int code;
     private String message;
     private String time;
+   // private NoticeBean notice;
 
     public T getResult() {
         return result;
@@ -57,10 +61,18 @@ public class ResultBean<T> {
     }
 
     public boolean isSuccess() {
+        // 每次回来后通知消息到达
+       // NoticeManager.publish(this, this.notice);
         return code == RESULT_SUCCESS && result != null;
     }
+/*
+    public NoticeBean getNotice() {
+        return notice;
+    }
 
-
+    public void setNotice(NoticeBean notice) {
+        this.notice = notice;
+    }*/
 
     @Override
     public String toString() {

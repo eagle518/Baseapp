@@ -139,10 +139,9 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     @Override
     protected void initData() {
         super.initData();
-       checkUpdate();
+        checkUpdate();
     }
     private void checkUpdate() {
-
         if (!GlobalApplication.get(Setting.KEY_CHECK_UPDATE, true)) {
             return;
         }

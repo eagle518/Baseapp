@@ -27,7 +27,6 @@ import okhttp3.Call;
 public class CheckUpdateManager {
 
     private boolean mIsShowDialog;
-    private ProgressDialog mWaitDialog;
     private Context mContext;
     private RequestPermissions mCaller;
 
@@ -35,32 +34,30 @@ public class CheckUpdateManager {
         this.mContext = context;
         mIsShowDialog = showWaitingDialog;
         if (mIsShowDialog) {
-            mWaitDialog = DialogHelper.getProgressDialog(mContext);
-            mWaitDialog.setMessage("正在检查中...");
-            mWaitDialog.setCancelable(false);
-            mWaitDialog.setCanceledOnTouchOutside(false);
+            Toast.makeText(GlobalApplication.getContext(),"正在检查中。。。。",Toast.LENGTH_LONG).show();
+
         }
     }
 
 
     public void checkUpdate() {
         if (mIsShowDialog) {
-            mWaitDialog.show();
+            Toast.makeText(GlobalApplication.getContext(),"正在检查中。。。。",Toast.LENGTH_LONG).show();
+
         }
 
         MyApi.checkUpdate(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
-                if (mIsShowDialog) {
-                    DialogHelper.getMessageDialog(mContext, "网络异常，无法获取新版本信息").show();
-                }
+                Toast.makeText(GlobalApplication.getContext(),"异常"+e,Toast.LENGTH_LONG).show();
+
             }
 
 
 
             @Override
             public void onResponse(String response, int id) {
-                GlobalApplication.showToast(response);
+               // Toast.makeText(GlobalApplication.getContext(),response,Toast.LENGTH_LONG).show();
                 try {
                     ResultBean<List<Version>> bean = AppOperator.createGson()
                             .fromJson(response, new TypeToken<ResultBean<List<Version>>>() {
@@ -73,8 +70,8 @@ public class CheckUpdateManager {
                                     .getInstance().getPackageName());
                             if (curVersionCode < Integer.parseInt(version.getCode())) {
 
-                                Toast.makeText(GlobalApplication.getContext(),"进入更新界面",Toast.LENGTH_LONG).show();
-                            //    UpdateActivity.show((Activity) mContext, version);
+
+                                UpdateActivity.show((Activity) mContext, version);
                              /*   AlertDialog.Builder dialog = DialogHelper.getConfirmDialog(mContext, version.getMessage(), new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -95,7 +92,7 @@ public class CheckUpdateManager {
                                 dialog.show();*/
                             } else {
                                 if (mIsShowDialog) {
-                                    DialogHelper.getMessageDialog(mContext, "已经是新版本了").show();
+                                Toast.makeText(GlobalApplication.getContext(),"已经是新版本了",Toast.LENGTH_LONG).show();
                                 }
                             }
                         }
