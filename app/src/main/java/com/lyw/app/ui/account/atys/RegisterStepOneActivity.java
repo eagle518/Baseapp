@@ -353,8 +353,9 @@ public class RegisterStepOneActivity extends AccountBaseActivity implements View
                 requestSmsCode();
                 break;
             case R.id.bt_register_submit:
-                requestRegister();
-                // RegisterStepTwoActivity.show(this,null);
+              //111  requestRegister();
+           //111     RegisterStepTwoActivity.show(this,null);
+                RegisterStepTwoActivity.show(this);
                 break;
             case R.id.lay_register_one_container:
                 hideKeyBoard(getCurrentFocus().getWindowToken());

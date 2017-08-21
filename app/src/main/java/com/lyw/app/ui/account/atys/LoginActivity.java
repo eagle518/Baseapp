@@ -336,7 +336,7 @@ public class LoginActivity extends AccountBaseActivity implements View.OnClickLi
                 break;
             case R.id.tv_login_forget_pwd:
                 //忘记密码
-             //1111   RetrieveActivity.show(LoginActivity.this);
+                RetrieveActivity.show(LoginActivity.this);
                 break;
             case R.id.bt_login_submit:
                 //用户登录
