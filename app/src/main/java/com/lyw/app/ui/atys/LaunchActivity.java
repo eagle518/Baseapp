@@ -2,16 +2,13 @@ package com.lyw.app.ui.atys;
 
 import android.content.Intent;
 import android.text.TextUtils;
-import android.widget.Toast;
 
-import com.lyw.app.AppConfig;
 import com.lyw.app.GlobalApplication;
 import com.lyw.app.R;
 import com.lyw.app.Setting;
 import com.lyw.app.ui.account.AccountHelper;
 import com.lyw.app.ui.account.bean.User;
 import com.lyw.app.utils.AppOperator;
-import com.lyw.app.utils.TimeUtils;
 
 
 /**

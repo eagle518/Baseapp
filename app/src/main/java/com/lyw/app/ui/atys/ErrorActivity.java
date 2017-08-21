@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -20,11 +21,12 @@ import butterknife.OnClick;
 public class ErrorActivity extends BaseActivity implements View.OnClickListener {
    // @BindView(R.id.tv_crash_info)
     private TextView mTextCrashInfo;
-
+    private Button mBtn_restart;
     @Override
     protected void initWindow() {
         super.initWindow();
         mTextCrashInfo = (TextView) findViewById(R.id.tv_crash_info);
+        mBtn_restart = (Button) findViewById(R.id.btn_restart);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -50,10 +52,14 @@ public class ErrorActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void initData() {
         super.initData();
+        setListener();
         mTextCrashInfo.setText(getIntent().getStringExtra("message"));
     }
 
-    @OnClick({R.id.btn_restart})
+    private void setListener(){
+        mBtn_restart.setOnClickListener(this);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

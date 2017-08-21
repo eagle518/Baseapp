@@ -62,6 +62,24 @@
             android:launchMode="singleTask"
             android:process=":crashInfo"
             android:screenOrientation="portrait" />
+        <!-- 新账户中心模块 -->
+        <activity
+            android:name=".ui.account.atys.LoginActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="登录中心"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Account_Base.App.Theme.NoTitle"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".ui.account.atys.RegisterStepOneActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="注册中心一"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Account_Base.App.Theme.NoTitle"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
 
         <service
             android:name=".update.DownloadService"
