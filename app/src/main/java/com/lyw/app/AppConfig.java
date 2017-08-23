@@ -27,7 +27,6 @@ import java.util.Properties;
 public class AppConfig {
     private final static String APP_CONFIG = "config";
 
-
     // 默认存放图片的路径
     public final static String DEFAULT_SAVE_IMAGE_PATH = Environment
             .getExternalStorageDirectory()

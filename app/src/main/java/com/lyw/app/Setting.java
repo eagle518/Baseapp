@@ -14,8 +14,13 @@ import com.lyw.app.utils.VersionUtil;
  */
 
 public final class Setting {
+
+    //服务url地址
     private static final String KEY_SEVER_URL = "serverUrl";
+    //版本号
     private static final String KEY_VERSION_CODE = "versionCode";
+    //客户端唯一标识
+    public static final String KEY_APP_UNIQUE_ID = "appUniqueID";
     //是否检查更新设置参数
     public static final String KEY_CHECK_UPDATE = "KEY_CHECK_UPDATE";
     //是否设置双击退出
@@ -40,7 +45,7 @@ public final class Setting {
         SharedPreferences sp = getSettingPreferences(context);
         return sp.getInt(KEY_VERSION_CODE, 0);
     }
-
+    //更新版本号
     private static int updateSaveVersionCode(Context context, int version) {
         SharedPreferences sp = getSettingPreferences(context);
         SharedPreferences.Editor editor = sp.edit().putInt(KEY_VERSION_CODE, version);

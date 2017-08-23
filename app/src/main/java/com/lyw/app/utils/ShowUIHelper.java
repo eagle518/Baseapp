@@ -1,0 +1,108 @@
+package com.lyw.app.utils;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+
+import com.lyw.app.GlobalApplication;
+import com.lyw.app.ui.account.atys.LoginActivity;
+import com.lyw.app.ui.atys.SimpleBackActivity;
+import com.lyw.app.ui.bean.SimpleBackPage;
+
+
+/**
+ * 界面帮助类
+ *
+ * @author FireAnt（http://my.oschina.net/LittleDY）
+ * @version 创建时间：2014年10月10日 下午3:33:36
+ */
+public class ShowUIHelper {
+
+
+
+    /**
+     * 显示登录界面
+     *
+     * @param context
+     */
+    public static void showLoginActivity(Context context) {
+        LoginActivity.show(context);
+    }
+
+
+
+
+
+    public static void showSimpleBack(Context context, SimpleBackPage page) {
+        Intent intent = new Intent(context, SimpleBackActivity.class);
+        intent.putExtra(SimpleBackActivity.BUNDLE_KEY_PAGE, page.getValue());
+        context.startActivity(intent);
+    }
+
+    public static void showSimpleBack(Context context, SimpleBackPage page,
+                                      Bundle args) {
+        Intent intent = new Intent(context, SimpleBackActivity.class);
+        intent.putExtra(SimpleBackActivity.BUNDLE_KEY_ARGS, args);
+        intent.putExtra(SimpleBackActivity.BUNDLE_KEY_PAGE, page.getValue());
+        context.startActivity(intent);
+    }
+
+
+
+
+    /**
+     * 显示设置界面
+     *
+     * @param context
+     */
+    public static void showSetting(Context context) {
+        showSimpleBack(context, SimpleBackPage.SETTING);
+    }
+
+    /**
+     * 显示关于界面
+     *
+     * @param context
+     */
+    public static void showAboutOSC(Context context) {
+      //111  showSimpleBack(context, SimpleBackPage.ABOUT_OSC);
+    }
+
+    /**
+     * 清除app缓存
+     */
+    public static void clearAppCache(boolean showToast) {
+        final Handler handler = showToast ? new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 1) {
+                    GlobalApplication.showToastShort("缓存清除成功");
+                } else {
+                    GlobalApplication.showToastShort("缓存清除失败");
+                }
+            }
+        } : null;
+        AppOperator.runOnThread(new Runnable() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    GlobalApplication.getInstance().clearAppCache();
+                    msg.what = 1;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    msg.what = -1;
+                }
+                if (handler != null)
+                    handler.sendMessage(msg);
+            }
+        });
+    }
+
+
+
+
+
+}

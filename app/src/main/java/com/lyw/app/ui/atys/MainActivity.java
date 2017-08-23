@@ -2,30 +2,26 @@ package com.lyw.app.ui.atys;
 
 
 import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lyw.app.AppConfig;
 import com.lyw.app.GlobalApplication;
 import com.lyw.app.R;
 import com.lyw.app.Setting;
 import com.lyw.app.ui.bean.Version;
-import com.lyw.app.ui.frags.MineFragment;
+import com.lyw.app.ui.frags.SubtestFragment;
 import com.lyw.app.ui.bean.Tab;
+import com.lyw.app.ui.frags.UserInfoFragment;
 import com.lyw.app.ui.widget.FragmentTabHost;
 import com.lyw.app.update.CheckUpdateManager;
 import com.lyw.app.update.DownloadService;
@@ -84,11 +80,11 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     private void initTab() {
 
 
-        Tab tab_mine1 = new Tab(MineFragment.class,R.string.tab1,R.drawable.selector_icon_mine);
-        Tab tab_mine2 = new Tab(MineFragment.class,R.string.tab2,R.drawable.selector_icon_mine);
-        Tab tab_mine3 = new Tab(MineFragment.class,R.string.tab3,R.drawable.selector_icon_mine);
-        Tab tab_mine4 = new Tab(MineFragment.class,R.string.tab4,R.drawable.selector_icon_mine);
-        Tab tab_mine5 = new Tab(MineFragment.class,R.string.mine,R.drawable.selector_icon_mine);
+        Tab tab_mine1 = new Tab(SubtestFragment.class,R.string.tab1,R.drawable.selector_icon_mine);
+        Tab tab_mine2 = new Tab(SubtestFragment.class,R.string.tab2,R.drawable.selector_icon_mine);
+        Tab tab_mine3 = new Tab(SubtestFragment.class,R.string.tab3,R.drawable.selector_icon_mine);
+        Tab tab_mine4 = new Tab(SubtestFragment.class,R.string.tab4,R.drawable.selector_icon_mine);
+        Tab tab_mine5 = new Tab(UserInfoFragment.class,R.string.mine,R.drawable.selector_icon_mine);
 
         mTabs.add(tab_mine1);
         mTabs.add(tab_mine2);

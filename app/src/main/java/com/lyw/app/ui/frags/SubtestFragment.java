@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Ivan on 15/9/22.
  */
-public class MineFragment extends BaseFragment implements View.OnClickListener{
+public class SubtestFragment extends BaseFragment implements View.OnClickListener{
 
     private TextView login;
     @Override
