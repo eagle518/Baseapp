@@ -15,6 +15,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lyw.app.AppConfig;
 import com.lyw.app.GlobalApplication;
 import com.lyw.app.R;
 import com.lyw.app.Setting;
@@ -138,7 +139,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         checkUpdate();
     }
     private void checkUpdate() {
-        if (!GlobalApplication.get(Setting.KEY_CHECK_UPDATE, true)) {
+        if (!GlobalApplication.get(AppConfig.KEY_CHECK_UPDATE, true)) {
             return;
         }
         CheckUpdateManager manager = new CheckUpdateManager(this, false);
@@ -194,7 +195,7 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
 
     @Override
     public void onBackPressed() {
-        boolean isDoubleClick = GlobalApplication.get(Setting.KEY_DOUBLE_CLICK_EXIT, true);
+        boolean isDoubleClick = GlobalApplication.get(AppConfig.KEY_DOUBLE_CLICK_EXIT, true);
         if (isDoubleClick) {
             long curTime = SystemClock.uptimeMillis();
             if ((curTime - mBackPressedTime) < (3 * 1000)) {

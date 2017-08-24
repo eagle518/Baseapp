@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 public class SubtestFragment extends BaseFragment implements View.OnClickListener{
 
     private TextView login;
-    @Override
+  /*  @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mine, container,
@@ -29,6 +29,12 @@ public class SubtestFragment extends BaseFragment implements View.OnClickListene
         initView(view);
         initData();
         return view;
+    }*/
+
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_mine;
     }
 
     @Override

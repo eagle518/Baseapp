@@ -3,14 +3,18 @@ package com.lyw.app.ui.bean;
 /*导入要放入替换的同一个activity下可后退的fragment*/
 
 import com.lyw.app.R;
+import com.lyw.app.ui.frags.subfrags.AboutOSCFragment;
+import com.lyw.app.ui.frags.subfrags.BrowserFragment;
 import com.lyw.app.ui.frags.subfrags.SettingsFragment;
 
 public enum SimpleBackPage {
         /*枚举*/
 
-    SETTING(15, R.string.actionbar_title_setting, SettingsFragment.class);
+    SETTING(15, R.string.actionbar_title_setting, SettingsFragment.class),
 
-   // ABOUT_OSC(17, R.string.actionbar_title_about_osc, AboutOSCFragment.class);
+    BROWSER(26, R.string.app_name, BrowserFragment.class),
+
+    ABOUT_OSC(17, R.string.actionbar_title_about_osc, AboutOSCFragment.class);
 
 
 

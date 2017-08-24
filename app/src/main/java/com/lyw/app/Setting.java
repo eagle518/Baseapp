@@ -21,10 +21,6 @@ public final class Setting {
     private static final String KEY_VERSION_CODE = "versionCode";
     //客户端唯一标识
     public static final String KEY_APP_UNIQUE_ID = "appUniqueID";
-    //是否检查更新设置参数
-    public static final String KEY_CHECK_UPDATE = "KEY_CHECK_UPDATE";
-    //是否设置双击退出
-    public static final String KEY_DOUBLE_CLICK_EXIT = "KEY_DOUBLE_CLICK_EXIT";
 
 
     public static SharedPreferences getSettingPreferences(Context context) {

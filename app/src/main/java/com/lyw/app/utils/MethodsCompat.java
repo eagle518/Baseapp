@@ -1,4 +1,4 @@
-package com.lyw.app.ui.widget;
+package com.lyw.app.utils;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

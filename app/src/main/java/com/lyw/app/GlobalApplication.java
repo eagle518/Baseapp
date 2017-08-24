@@ -10,14 +10,10 @@ import android.widget.Toast;
 
 import com.lyw.app.cache.DataCleanManager;
 import com.lyw.app.ui.api.MyApi;
-import com.lyw.app.ui.widget.MethodsCompat;
+import com.lyw.app.utils.MethodsCompat;
 import com.lyw.app.ui.widget.SimplexToast;
-import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.OkHttpClient;
 
 
 /**
@@ -28,10 +24,10 @@ import okhttp3.OkHttpClient;
  *
  */
 public class GlobalApplication extends Application {
-    //sp设立的文件名字
+    //sp设立的文件名字-基础application
     private static final String PREF_NAME = "creativelocker.pref";
-
-    private static final String CONFIG_READ_STATE_PRE = "CONFIG_READ_STATE_PRE_";
+    // 默认分页大小
+    public static final int PAGE_SIZE = 20;
     //全局单例
     private static GlobalApplication instance;
     //上下文对象
@@ -141,6 +137,8 @@ public class GlobalApplication extends Application {
         //初始化其他相关，框架，sdk，数据库,百度地图....
         MyApi.init(this);
     }
+
+
 
     //关于sp的静态操作方法
     public static void set(String key, int value) {

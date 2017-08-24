@@ -10,6 +10,7 @@ import com.lyw.app.GlobalApplication;
 import com.lyw.app.ui.account.atys.LoginActivity;
 import com.lyw.app.ui.atys.SimpleBackActivity;
 import com.lyw.app.ui.bean.SimpleBackPage;
+import com.lyw.app.ui.frags.subfrags.BrowserFragment;
 
 
 /**
@@ -67,7 +68,24 @@ public class ShowUIHelper {
      * @param context
      */
     public static void showAboutOSC(Context context) {
-      //111  showSimpleBack(context, SimpleBackPage.ABOUT_OSC);
+       showSimpleBack(context, SimpleBackPage.ABOUT_OSC);
+    }
+
+    /**
+     * 打开内置浏览器
+     *
+     * @param context
+     * @param url
+     */
+    public static void openInternalBrowser(Context context, String url) {
+        try {
+            Bundle bundle = new Bundle();
+            bundle.putString(BrowserFragment.BROWSER_KEY, url);
+            showSimpleBack(context, SimpleBackPage.BROWSER, bundle);
+        } catch (Exception e) {
+            e.printStackTrace();
+         //111外置浏览器   openExternalBrowser(context, url);
+        }
     }
 
     /**

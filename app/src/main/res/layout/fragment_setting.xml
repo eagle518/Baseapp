@@ -116,6 +116,39 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/rl_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:padding="@dimen/space_12"
+            android:gravity="center_vertical"
+            android:orientation = "horizontal"
+            android:background="@drawable/ic_material">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/space_4"
+                android:gravity="center_vertical"
+                android:clickable="false"
+                android:text="@string/about"
+                android:textColor="@color/main_black"
+                android:textSize="@dimen/text_size_16"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/gray"
+                android:layout_marginLeft="@dimen/lay_14"/>
+        </FrameLayout>
+
+        <FrameLayout
             android:id="@+id/rl_check_version"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -18,12 +18,10 @@ import android.widget.TextView;
 import com.lyw.app.AppConfig;
 import com.lyw.app.GlobalApplication;
 import com.lyw.app.R;
-import com.lyw.app.Setting;
 import com.lyw.app.ui.account.AccountHelper;
-import com.lyw.app.ui.account.atys.LoginActivity;
 import com.lyw.app.ui.bean.Version;
 import com.lyw.app.ui.frags.BaseFragment;
-import com.lyw.app.ui.widget.MethodsCompat;
+import com.lyw.app.utils.MethodsCompat;
 import com.lyw.app.ui.widget.togglebutton.ToggleButton;
 import com.lyw.app.update.CheckUpdateManager;
 import com.lyw.app.update.DownloadService;
@@ -56,7 +54,7 @@ public class SettingsFragment extends BaseFragment implements EasyPermissions.Pe
     private Version mVersion;
 
 
-    @Override
+  /*  @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_setting, container,
@@ -64,13 +62,9 @@ public class SettingsFragment extends BaseFragment implements EasyPermissions.Pe
         initView(view);
         initData();
         return view;
-    }
-
-
-   /* @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_settings;
     }*/
+
+
 
 
 
@@ -88,12 +82,13 @@ public class SettingsFragment extends BaseFragment implements EasyPermissions.Pe
         mTbDoubleClickExit.setOnToggleChanged(new ToggleButton.OnToggleChanged() {
             @Override
             public void onToggle(boolean on) {
-                GlobalApplication.set(Setting.KEY_DOUBLE_CLICK_EXIT, on);
+                GlobalApplication.set(AppConfig.KEY_DOUBLE_CLICK_EXIT, on);
             }
         });
 
         view.findViewById(R.id.rl_clean_cache).setOnClickListener(this);
         view.findViewById(R.id.rl_double_click_exit).setOnClickListener(this);
+        view.findViewById(R.id.rl_about).setOnClickListener(this);
         mRlCheck_version.setOnClickListener(this);
         // view.findViewById(R.id.rl_exit).setOnClickListener(this);
         mCancel.setOnClickListener(this);
@@ -103,7 +98,7 @@ public class SettingsFragment extends BaseFragment implements EasyPermissions.Pe
 
     @Override
     public void initData() {
-        if (GlobalApplication.get(Setting.KEY_DOUBLE_CLICK_EXIT, true)) {
+        if (GlobalApplication.get(AppConfig.KEY_DOUBLE_CLICK_EXIT, true)) {
             mTbDoubleClickExit.setToggleOn();
         } else {
             mTbDoubleClickExit.setToggleOff();
@@ -125,6 +120,12 @@ public class SettingsFragment extends BaseFragment implements EasyPermissions.Pe
             mSettingLineBottom.setVisibility(View.VISIBLE);
         }
     }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_setting;
+    }
+
 
     /**
      * 计算缓存的大小
@@ -160,6 +161,9 @@ public class SettingsFragment extends BaseFragment implements EasyPermissions.Pe
                 break;
             case R.id.rl_check_version:
                 onClickUpdate();
+                break;
+            case R.id.rl_about:
+                ShowUIHelper.showAboutOSC(getActivity());
                 break;
             case R.id.rl_cancel:
                 // 清理所有缓存

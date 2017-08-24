@@ -25,6 +25,7 @@ import android.widget.EditText;
 
 import com.lyw.app.GlobalApplication;
 import com.lyw.app.R;
+import com.lyw.app.ui.widget.SimplexToast;
 
 
 import java.io.File;
@@ -270,6 +271,24 @@ public class TDevice {
             return resources.getColor(id);
         }
     }
+//是否有webview
+    private static Boolean mHasWebView;
 
-
+    public static boolean hasWebView(Context context) {
+        if (mHasWebView != null) {
+            if (!mHasWebView)
+                SimplexToast.show(context, "Not WebView for you phone");
+            return mHasWebView;
+        }
+        try {
+            WebView webView = new WebView(context);
+            webView.destroy();
+            mHasWebView = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            mHasWebView = false;
+            SimplexToast.show(context, "Not WebView for you phone");
+        }
+        return mHasWebView;
+    }
 }

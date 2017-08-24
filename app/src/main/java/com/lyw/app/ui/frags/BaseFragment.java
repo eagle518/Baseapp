@@ -1,6 +1,7 @@
 package com.lyw.app.ui.frags;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,16 +14,14 @@ import com.lyw.app.GlobalApplication;
 import com.lyw.app.R;
 import com.lyw.app.ui.dialog.DialogControl;
 
+import java.io.Serializable;
 
-public class BaseFragment extends Fragment implements android.view.View.OnClickListener,  BaseFragmentInterface{
 
-    public static final int STATE_NONE = 0;
-    public static final int STATE_REFRESH = 1;
-    public static final int STATE_LOADMORE = 2;
-    public static final int STATE_NOMORE = 3;
-    public static final int STATE_PRESSNONE = 4;// 正在下拉但还没有到刷新的状态
-    public static int mState = STATE_NONE;
+public abstract class BaseFragment extends Fragment implements android.view.View.OnClickListener{
 
+    protected Context mContext;
+    protected View mView;
+    protected Bundle mBundle;
     protected LayoutInflater mInflater;
 
     public GlobalApplication getApplication() {
@@ -30,16 +29,53 @@ public class BaseFragment extends Fragment implements android.view.View.OnClickL
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mContext = null;
+    }
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mBundle = getArguments();
+        initBundle(mBundle);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        this.mInflater = inflater;
-        View view = super.onCreateView(inflater, container, savedInstanceState);
-        return view;
+
+
+
+        if (mView != null) {
+            ViewGroup parent = (ViewGroup) mView.getParent();
+            if (parent != null)
+                parent.removeView(mView);
+        } else {
+            mView = inflater.inflate(getLayoutId(), container, false);
+            mInflater = inflater;
+//            this.mInflater = inflater;
+//            super.onCreateView(inflater, container, savedInstanceState);
+            // Do something
+            onBindViewBefore(mView);
+            // Get savedInstanceState
+            if (savedInstanceState != null)
+                onRestartInstance(savedInstanceState);
+            // Init
+            initView(mView);
+            initData();
+        }
+        return mView;
+
+    }
+
+    protected void onBindViewBefore(View root) {
+        // ...
     }
 
     @Override
@@ -55,61 +91,50 @@ public class BaseFragment extends Fragment implements android.view.View.OnClickL
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mBundle = null;
     }
 
 
-    protected int getLayoutId() {
-        return 0;
+    //获取布局id
+    protected abstract int getLayoutId();
+
+    protected void initBundle(Bundle bundle) {
+
+    }
+    protected void initView(View view) {
+
     }
 
-    protected View inflateView(int resId) {
-        return this.mInflater.inflate(resId, null);
+    protected void initData() {
+
     }
+
+    protected <T extends Serializable> T getBundleSerializable(String key) {
+        if (mBundle == null) {
+            return null;
+        }
+        return (T) mBundle.getSerializable(key);
+    }
+
+    /**
+     * 获取一个图片加载管理器
+     *
+     * @return RequestManager
+     */
+
 
     public boolean onBackPressed() {
         return false;
     }
 
-    protected void hideWaitDialog() {
-        FragmentActivity activity = getActivity();
-        if (activity instanceof DialogControl) {
-            ((DialogControl) activity).hideWaitDialog();
-        }
-    }
-    protected ProgressDialog showWaitDialog() {
-        return showWaitDialog(R.string.loading);
-    }
 
-    protected ProgressDialog showWaitDialog(int resid) {
-        FragmentActivity activity = getActivity();
-        if (activity instanceof DialogControl) {
-            return ((DialogControl) activity).showWaitDialog(resid);
-        }
-        return null;
-    }
-
-    protected ProgressDialog showWaitDialog(String str) {
-        FragmentActivity activity = getActivity();
-        if (activity instanceof DialogControl) {
-            return ((DialogControl) activity).showWaitDialog(str);
-        }
-        return null;
-    }
-
-    @Override
-    public void initView(View view) {
-
-    }
-
-    @Override
-    public void initData() {
-
-    }
 
     @Override
     public void onClick(View v) {
 
     }
 
+    protected void onRestartInstance(Bundle bundle) {
 
+    }
 }

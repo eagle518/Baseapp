@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.lyw.app.R;
@@ -96,7 +97,7 @@ public class UserInfoFragment extends BaseFragment implements View.OnClickListen
 
 
 
-    @Override
+   /* @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_user_home, container,
@@ -104,9 +105,13 @@ public class UserInfoFragment extends BaseFragment implements View.OnClickListen
         initView(view);
         initData();
         return view;
+    }*/
+
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_main_user_home;
     }
-
-
 
     @Override
     public void initView(View view) {
@@ -176,7 +181,7 @@ public class UserInfoFragment extends BaseFragment implements View.OnClickListen
 
             switch (id) {
                 case R.id.rl_message:
-               //111     UserMessageActivity.show(getActivity());
+                    Toast.makeText(getActivity(),"第一条目",Toast.LENGTH_SHORT).show();
                     break;
                 default:
                     break;

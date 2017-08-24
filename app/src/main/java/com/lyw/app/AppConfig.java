@@ -26,6 +26,10 @@ import java.util.Properties;
  */
 public class AppConfig {
     private final static String APP_CONFIG = "config";
+    //是否检查更新设置参数
+    public static final String KEY_CHECK_UPDATE = "KEY_CHECK_UPDATE";
+    //是否设置双击退出
+    public static final String KEY_DOUBLE_CLICK_EXIT = "KEY_DOUBLE_CLICK_EXIT";
 
     // 默认存放图片的路径
     public final static String DEFAULT_SAVE_IMAGE_PATH = Environment
